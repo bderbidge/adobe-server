@@ -1,107 +1,89 @@
+const chai = require('chai');
 const expect = require('chai').expect;
 const {execute} = require('../../model/romanNumeral');
+const chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
 
-const req = {
+let req = {
   query: {
     query: null,
   },
 };
 
 describe('Roman Numeral', function() {
-  it('Should error out if no query provided ', function() {
+  it('Should error out if no query provided ', async () => {
     let newReq = req;
-    execute(newReq).then((data) => {
-      expect(data).to.equal(null);
-    });
+
+    expect(execute(newReq)).eventually.equal(null);
   });
 
-  it('Should Error out if not query param in the URI', function() {
+  it('Should Error out if not query param in the URI', async () => {
     let newReq = req;
     newReq.query.query = null;
 
-    execute(newReq).then((data) => {
-      expect(data).to.equal(null);
-    });
+    expect(execute(newReq)).eventually.equal(null);
   });
 
-  it('Should error on invalid query string type', function() {
+  it('Should error on invalid query string type', async () => {
     let newReq = req;
     newReq.query.query = 'two hundred';
 
-    execute(newReq).then((data) => {
-      expect(data).to.equal(null);
-    });
+    expect(execute(newReq)).eventually.equal(null);
   });
 
-  it('Should error on out of bounds number 0', function() {
+  it('Should error on out of bounds number 0', async () => {
     let newReq = req;
     newReq.query.query = '0';
 
-    execute(newReq).then((data) => {
-      expect(data).to.equal(null);
-    });
+    expect(execute(newReq)).eventually.equal(null)
   });
 
-  it('Should error on out of bounds number -1', function() {
+  it('Should error on out of bounds number -1', async () => {
     let newReq = req;
     newReq.query.query = '-1';
 
-    execute(newReq).then((data) => {
-      expect(data).to.equal(null);
-    });
+    expect(execute(newReq)).eventually.equal(null);
   });
 
-  it('Should error on out of bounds number -1000', function() {
+  it('Should error on out of bounds number -1000', async () => {
     let newReq = req;
     newReq.query.query = '-1000';
 
-    execute(newReq).then((data) => {
-      expect(data).to.equal(null);
-    });
+    expect(execute(newReq)).eventually.equal(null);
   });
 
-  it('Should error on out of bounds number 4000', function() {
+  it('Should error on out of bounds number 4000', async () => {
     let newReq = req;
     newReq.query.query = '4000';
 
-    execute(newReq).then((data) => {
-      expect(data).to.equal(null);
-    });
+    expect(execute(newReq)).eventually.equal(null);
   });
 
-  it('1 should return roman numeral I', function() {
+  it('1 should return roman numeral I', async () => {
     let newReq = req;
     newReq.query.query = '1';
 
-    execute(newReq).then((data) => {
-      expect(data).to.equal('I');
-    });
+    expect(execute(newReq)).eventually.equal('I')
   });
 
-  it('1 type number should return roman numeral I', function() {
+  it('1 type number should return roman numeral I', async () => {
     let newReq = req;
     newReq.query.query = 1;
 
-    execute(newReq).then((data) => {
-      expect(data).to.equal('I');
-    });
+    expect(execute(newReq)).eventually.equal('I')
   });
 
-  it('256 should return roman numeral CCLVI', function() {
+  it('256 should return roman numeral CCLVI', async () => {
     let newReq = req;
     newReq.query.query = '256';
 
-    execute(newReq).then((data) => {
-      expect(data).to.equal('CCLVI');
-    });
+    expect(execute(newReq)).eventually.equal('CCLVI')
   });
 
-  it('3999 should return roman numeral MMMCMXCIX', function() {
+  it('3999 should return roman numeral MMMCMXCIX', async () => {
     let newReq = req;
     newReq.query.query = '3999';
 
-    execute(newReq).then((data) => {
-      expect(data).to.equal('MMMCMXCIX');
-    });
+    expect(execute(newReq)).eventually.equal('MMMCMXCIX')
   });
 });

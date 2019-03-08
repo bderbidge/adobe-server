@@ -1,166 +1,73 @@
-const expect = require('chai').expect;
-const {execute} = require('../../routes/romanNumeralRoute');
 
-const req = {
-  query: {
-    query: null,
-  },
-};
+var request = require('supertest');
+describe('Test Roman Numeral Route', function() {
+  var server;
 
-const res = {
-  sendCalledWith: '',
-  httpstatus: 200,
-  json: {
-    error: null,
-  },
-  send: function(arg) {
-    this.sendCalledWith = arg;
-  },
-  status: function(arg) {
-    this.httpstatus = arg;
-  },
-  json: function(arg) {
-    this.json = arg;
-  },
-  end: function() {
-
-  }
-};
-
-describe('Roman Numeral Route', function() {
-  it('Should error out if no query provided ', function() {
-    let newReq = {...req};
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-
-      expect(newRes.sendCalledWith).to.equal('');
-      expect(newRes.httpstatus).to.equal(400);
-
-    });
+  beforeEach(function() {
+    server = require('../../server');
   });
 
-
-  it('10 should return roman numeral X', function() {
-    let newReq = {...req};
-    let newRes = {...res};
-    newReq.query.query = '10';
-    execute(newReq, newRes).then((data) => {
-
-      expect(newRes.sendCalledWith).to.equal('X');
-      expect(newRes.httpstatus).to.equal(200);
-
-    });
+  afterEach(function() {
+    server.close();
   });
 
-  it('Should Error out if not query param in the URI', function() {
-    let newReq = {...req};
-    newReq.query.query = null;
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-      expect(newRes.sendCalledWith).to.equal('');
-      expect(newRes.httpstatus).to.equal(400);
-    });
+  it('404 everything else', function(done) {
+    request(server).get('/foo/bar').expect(404, done);
   });
 
-  it('Should error on invalid query string type', function() {
-    let newReq = {...req};
-    newReq.query.query = 'two hundred';
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-      expect(newRes.sendCalledWith).to.equal('');
-      expect(newRes.httpstatus).to.equal(400);
-    });
+  it('responds to /romannumeral post', function(done) {
+    request(server).post('/romannumeral').expect(404, done);
   });
 
-  it('Should error on out of bounds number 0', function() {
-    let newReq = {...req};
-    newReq.query.query = '0';
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-      expect(newRes.sendCalledWith).to.equal('');
-      expect(newRes.httpstatus).to.equal(400);
-    });
+  it('responds to /romannumeral put', function(done) {
+    request(server).put('/romannumeral').expect(404, done);
   });
 
-  it('Should error on out of bounds number -1', function() {
-    let newReq = {...req};
-    newReq.query.query = '-1';
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-      expect(newRes.sendCalledWith).to.equal('');
-      expect(newRes.httpstatus).to.equal(400);
-    });
+  it('responds to /romannumeral delete', function(done) {
+    request(server).delete('/romannumeral').expect(404, done);
   });
 
-  it('Should error on out of bounds number -1000', function() {
-    let newReq = {...req};
-    newReq.query.query = '-1000';
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-      expect(newRes.sendCalledWith).to.equal('');
-      expect(newRes.httpstatus).to.equal(400);
-    });
+  it('responds to /romannumeral get', function(done) {
+    request(server).get('/romannumeral').expect(400, done);
   });
 
-  it('Should error on out of bounds number 4000', function() {
-    let newReq = {...req};
-    newReq.query.query = '4000';
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-      expect(newRes.sendCalledWith).to.equal('');
-      expect(newRes.httpstatus).to.equal(400);
-    });
+  it('responds to /romannumeral?query=twohundred', function(done) {
+    request(server).get('/romannumeral?query=twohundred').expect(400, done);
   });
 
-  it('1 should return roman numeral I', function() {
-    let newReq = {...req};
-    newReq.query.query = '1';
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-      expect(newRes.sendCalledWith).to.equal('I');
-      expect(newRes.httpstatus).to.equal(200);
-    });
+  it('responds to /romannumeral?query=38a', function(done) {
+    request(server).get('/romannumeral?query=38a').expect(400, done);
   });
 
-  it('1 type number should return roman numeral I', function() {
-    let newReq = {...req};
-    newReq.query.query = 1;
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-      expect(newRes.sendCalledWith).to.equal('I');
-      expect(newRes.httpstatus).to.equal(200);
-    });
+  it('responds to /romannumeral?query=3@@', function(done) {
+    request(server).get('/romannumeral?query=3@@').expect(400, done);
   });
 
-  it('256 should return roman numeral CCLVI', function() {
-    let newReq = {...req};
-    newReq.query.query = '256';
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-      expect(newRes.sendCalledWith).to.equal('CCLVI');
-      expect(newRes.httpstatus).to.equal(200);
-    });
+  it('responds to /romannumeral?query=-1', function(done) {
+    request(server).get('/romannumeral?query=-1').expect(400, done);
   });
 
-  it('3999 should return roman numeral MMMCMXCIX', function() {
-    let newReq = {...req};
-    newReq.query.query = '3999';
-    let newRes = {...res};
-
-    execute(newReq, newRes).then((data) => {
-      expect(newRes.sendCalledWith).to.equal('MMMCMXCIX');
-      expect(newRes.httpstatus).to.equal(200);
-    });
+  it('responds to /romannumeral?query=0', function(done) {
+    request(server).get('/romannumeral?query=0').expect(400, done);
   });
 
+  it('responds to /romannumeral?query=266', function(done) {
+    request(server).get('/romannumeral?query=266').expect(200, done);
+  });
+
+  it('responds to /romannumeral?query=255', function(done) {
+    request(server).get('/romannumeral?query=255').expect(200, done);
+  });
+
+  it('responds to /romannumeral?query=1', function(done) {
+    request(server).get('/romannumeral?query=1').expect(200, done);
+  });
+
+  it('responds to /romannumeral?query=3999', function(done) {
+    request(server).get('/romannumeral?query=3999').expect(200, done);
+  });
+
+  it('responds to /romannumeral?query=4000', function(done) {
+    request(server).get('/romannumeral?query=4000').expect(400, done);
+  });
 });

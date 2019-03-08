@@ -1,31 +1,26 @@
 const romannumeral = require('../model/romanNumeral');
+var express = require('express');
+var router = express.Router();
 
-module.exports = {
-  execute: async function(req, res) {
-    try {
-      romannumeral.execute(req)
-          .then((result) => {
+router.get('/romannumeral', (req, res, next) => {
 
-            if (result) {
-              res.status(200);
-              return res.send(result);
-            }
+  romannumeral.execute(req)
+      .then((result) => {
+        if (result != null) {
+          res.status(200);
+          return res.send(result);
+        }
 
-            res.status(400);
-            res.end();
-          })
-          .catch((err) => {
-
-            res.status(400);
-            res.json({
-              error: err.message,
-            });
-          });
-    } catch (err) {
-      res.status(400);
-      res.json({
-        error: err.message,
+        res.status(400);
+        return res.end();
+      })
+      .catch((err) => {
+        res.status(500);
+        res.json({
+          error: err.message,
+        });
+        next();
       });
-    }
-  }
-}
+});
+
+module.exports = router;
