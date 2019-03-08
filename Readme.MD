@@ -1,7 +1,7 @@
 # Adobe Interview
 
 A Node.js webserver that takes in a number and returns a roman numeral. 
-Roman Numeral Spesification: [Wikipedia] (https://en.wikipedia.org/wiki/Roman_numerals)
+Roman Numeral Spesification: [Wikipedia](https://en.wikipedia.org/wiki/Roman_numerals)
 
 ## Running Locally
 
