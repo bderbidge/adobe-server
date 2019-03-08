@@ -1,6 +1,6 @@
 # Adobe Interview
 
-A Node.js webserver that takes in a number and returns a roman numeral. 
+A Node.js webserver that takes in a number and returns a roman numeral. <br>
 Roman Numeral Spesification: [Wikipedia](https://en.wikipedia.org/wiki/Roman_numerals)
 
 ## Running Locally
@@ -24,8 +24,8 @@ npm tests
 
 ## Example
 
-To retrieve a roman numeral from the HTTP Endpoint, send a URI in this format: 
-http://localhost:8080/romannumeral?query={integer} 
+To retrieve a roman numeral from the HTTP Endpoint, send a URI in this format: <br>
+http://localhost:8080/romannumeral?query={integer} <br>
 {integer} should be any number between 1-255.
 
 ## Documentation
