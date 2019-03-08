@@ -5,8 +5,7 @@ Roman Numeral Spesification: https://en.wikipedia.org/wiki/Roman_numerals
 
 ## Running Locally
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
-
+Make sure you have [Node.js](http://nodejs.org/).
 ```sh
 git clone https://github.com/bderbidge/adobe-server.git # or clone your own fork
 cd adobe-server
