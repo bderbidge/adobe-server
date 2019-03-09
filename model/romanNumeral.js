@@ -1,5 +1,5 @@
 module.exports = {
-  execute: async function(req) {
+  execute: async (req) => {
 
     // Error checking to make sure that the query string is a number
     try {
@@ -31,32 +31,38 @@ module.exports = {
 
       let romanNumeral = '';
 
-      // Get the number in the thousands spot and get the cooresponding roman
-      // numeral from the thousands array to add to the return string
-
-      let thousandNumber = Math.floor(queryNumber / 1000)
-      romanNumeral = romanNumeral + thousands[thousandNumber];
-      let hundrednumber = queryNumber % 1000;
-
-      // Get the number in the hundreds spot and get the cooresponding roman
-      // numeral from the hundreds array to add to the return string
-      num = Math.floor(hundrednumber / 100)
-      romanNumeral = romanNumeral + hundreds[num];
-      let tensnumber = hundrednumber % 100;
-
-      // Get the number in the tens spot and get the cooresponding roman
-      // numeral from the tens array to add to the return string
-      num = Math.floor(tensnumber / 10)
-      romanNumeral = romanNumeral + tens[num];
-      let onesNum = Math.floor(tensnumber % 10);
+      let returnNum = getNumeral(thousands, queryNumber, 1000, romanNumeral);
+      returnNum =
+          getNumeral(hundreds, returnNum.number, 100, returnNum.numeralString);
+      returnNum =
+          getNumeral(tens, returnNum.number, 10, returnNum.numeralString);
+      romanNumeral = returnNum.numeralString;
 
       // Get the number in the ones spot and get the cooresponding roman
       // numeral from the ones array to add to the return string
-      romanNumeral = romanNumeral + ones[onesNum];
+      romanNumeral = romanNumeral + ones[returnNum.number];
 
       return romanNumeral;
     } catch (error) {
       throw error;
     }
   }
+}
+
+// This function takes in an array of roman numerals and the current number
+// Returns the roman numeral string that has been constructed so far and returns
+// the
+function getNumeral(numeralArray, currentNumber, divisionNum, romanNumeralStr) {
+
+  // Get the leading number from the current number
+  let num = Math.floor(currentNumber / divisionNum);
+
+  // Get the roman numeral from the corresponding array to add to the roman
+  // numeral string
+  romanNumeralStr = romanNumeralStr + numeralArray[num];
+
+  // Removes the leading number and returns the remainder
+  let returnNum = Math.floor(currentNumber % divisionNum);
+
+  return {number: returnNum, numeralString: romanNumeralStr};
 }

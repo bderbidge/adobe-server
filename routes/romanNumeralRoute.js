@@ -23,4 +23,8 @@ router.get('/romannumeral', async (req, res, next) => {
   }
 });
 
+// Return 404 error for all invalid requests
+router.get('*', function(req, res) {
+  res.status(404).end();
+});
 module.exports = router;

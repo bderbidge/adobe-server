@@ -10,10 +10,10 @@
   "author": "Brandon Derbidge",
   "license": "ISC",
   "dependencies": {
-    "chai-as-promised": "^7.1.1",
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "chai-as-promised": "^7.1.1",
     "chai": "^4.2.0",
     "mocha": "^6.0.2",
     "supertest": "^3.4.2"

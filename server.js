@@ -6,11 +6,6 @@ const romanNumeralRoute = require('./routes/romanNumeralRoute');
 
 app.use(romanNumeralRoute);
 
-// Return 404 error for all invalid requests
-app.get('*', function(req, res) {
-  res.status(404).end();
-});
-
 var server = app.listen(8080, function() {
   var port = server.address().port;
   console.log('Listening on port %s', port);
