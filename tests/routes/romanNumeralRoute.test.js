@@ -68,6 +68,10 @@ describe('Test Roman Numeral Route', function() {
   });
 
   it('responds to /romannumeral?query=4000', function(done) {
-    request(server).get('/romannumeral?query=4000').expect(400, done);
+    request(server).get('/romannumeral?query=4000').expect(200, done);
+  });
+
+  it('responds to /romannumeral?query=25459', function(done) {
+    request(server).get('/romannumeral?query=25459').expect(200, done);
   });
 });

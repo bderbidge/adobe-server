@@ -52,11 +52,11 @@ describe('Roman Numeral', function() {
     expect(execute(newReq)).eventually.equal(null);
   });
 
-  it('Should error on out of bounds number 4000', async () => {
+  it('4000 Should should return IV', async () => {
     let newReq = req;
     newReq.query.query = '4000';
 
-    expect(execute(newReq)).eventually.equal(null);
+    expect(execute(newReq)).eventually.equal('IV');
   });
 
   it('1 should return roman numeral I', async () => {
@@ -84,6 +84,20 @@ describe('Roman Numeral', function() {
     let newReq = req;
     newReq.query.query = '3999';
 
-    expect(execute(newReq)).eventually.equal('MMMCMXCIX')
+    expect(execute(newReq)).eventually.equal('IIICMXCIX')
+  });
+
+  it('25459 should return roman numeral XXVCDLIX', async () => {
+    let newReq = req;
+    newReq.query.query = '25459';
+
+    expect(execute(newReq)).eventually.equal('XXVCDLIX')
+  });
+
+  it('5000000 should return roman numeral -<br>-<br>V', async () => {
+    let newReq = req;
+    newReq.query.query = '5000000';
+
+    expect(execute(newReq)).eventually.equal('-<br>-<br>V')
   });
 });
