@@ -7,8 +7,7 @@ Roman Numeral Spesification: [Wikipedia](https://en.wikipedia.org/wiki/Roman_num
 ## Engineering and Testing Methodology
 
 My development methodology is to use Test Driven Development in writing software.
-I first write the tests that I know should not pass, and then my edge cases. 
-Then I write cases that I believe should pass. 
+I first write the tests that I know should not pass, then my edge cases, and then I write cases that I believe should pass. 
 
 I also believe in the single responsibility principle when developing and building software.
 Therefore, like my functions the components I create have a single responsibility.
