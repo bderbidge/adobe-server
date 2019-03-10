@@ -49,8 +49,8 @@ The Model folder holds the romanNumeral.js file which does the logic of converti
 
 ## Documentation
 
-A Node.js app using [Express 4](http://expressjs.com/).
-Mocha test framework [Mochajs](https://mochajs.org/)
-Chai TDD assertion library [Chaijs](https://www.chaijs.com/)
-SuperTest HTTP assertions library [SuperTest](https://www.npmjs.com/package/supertest)
-Chai As Promised Chai as Promised extends Chai with a fluent language for asserting facts about promises. [Chai As Promised](https://www.npmjs.com/package/chai-as-promised)
+A Node.js app using [Express 4](http://expressjs.com/). <br>
+Mocha test framework [Mochajs](https://mochajs.org/) <br>
+Chai TDD assertion library [Chaijs](https://www.chaijs.com/)<br>
+SuperTest HTTP assertions library [SuperTest](https://www.npmjs.com/package/supertest)<br>
+Chai As Promised Chai as Promised extends Chai with a fluent language for asserting facts about promises. [Chai As Promised](https://www.npmjs.com/package/chai-as-promised)<br>
