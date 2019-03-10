@@ -22,32 +22,7 @@ module.exports =
             return null;
           }
 
-          // The arrays have the different combinations to form a roman numeral
-          // for each spot in the number
-          // const thousands = ['', 'M', 'MM', 'MMM'];
-          // const hundreds =
-          //     ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'];
-          // const tens =
-          //     ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'];
-          // const ones =
-          //     ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
-
-          let romanNumeral = '';
-
-          // let returnNum =
-          //     getNumeral(thousands, queryNumber, 1000, romanNumeral);
-          // returnNum = getNumeral(
-          //     hundreds, returnNum.number, 100, returnNum.numeralString);
-          // returnNum =
-          //     getNumeral(tens, returnNum.number, 10,
-          //     returnNum.numeralString);
-          // romanNumeral = returnNum.numeralString;
-
-          // // Get the number in the ones spot and get the cooresponding roman
-          // // numeral from the ones array to add to the return string
-          // romanNumeral = romanNumeral + ones[returnNum.number];
-
-          romanNumeral = vinculum(queryNumber);
+          let romanNumeral = vinculum(queryNumber);
 
           return romanNumeral;
         } catch (error) {
@@ -74,8 +49,8 @@ function getNumeral(numeralArray, currentNumber, divisionNum, romanNumeralStr) {
   return {number: returnNum, numeralString: romanNumeralStr};
 }
 
+// This function constructs a roman numeral string from 0 - 999
 function getRoman(number) {
-
   const hundreds = ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'];
   const tens = ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'];
   const ones = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
@@ -91,41 +66,49 @@ function getRoman(number) {
   return romanNumeral;
 }
 
+// This function gives functionality for vinculum numbers. It takes in a number
+// and returns a roman numeral representation of that number. Vinculum numbers
+// have a bar over the top and this function constructs that number
 function vinculum(number) {
-
 
   let numbersub = number;
   let num = number;
   let bararray = [];
   let romanNumeralStr = ''
 
-
   if (num < 1000) {
     romanNumeralStr += getRoman(num);
   }
 
-  while (num > 1000) {
+  while (num > 999) {
     let barnum = 0;
-    while (num > 1000) {
+
+    while (num > 999) {
+      // Keep track of how many bars need to go over the number
       barnum++;
-      num = num / 1000;
+      num = Math.floor(num / 1000);
       if (num < 1000) {
         let tempStr = getRoman(num);
         romanNumeralStr = romanNumeralStr + tempStr
-        for (i = 0; i < barnum; i++) {
+        let barlen = barnum - 1
+
+        // The array holds the bars that go over the roman numerals.
+        // The foor loop determines how many dashes are needed to go over the
+        // roman numeral.
+        for (let i = 0; i < barnum; i++) {
           let line = '-'
           let barstr = line.repeat(romanNumeralStr.length);
-          if (bararray.length <= barnum - 1) {
+          if (bararray.length <= barlen) {
             bararray.push(barstr)
           } else {
-            bararray[i] += barstr;
+            let tempstr = bararray[i]
+            bararray[i] = tempstr + barstr;
           }
         }
       }
     }
 
-
-    let total = Math.floor(num) * barnum * 1000
+    let total = Math.floor(num) * Math.pow(1000, barnum);
     let tempnum = numbersub - total;
     num = tempnum;
 
@@ -135,6 +118,7 @@ function vinculum(number) {
     }
   }
 
+  // This loop puts bars over the roman numeral
   let barfinal = '';
   for (let i = bararray.length - 1; i > -1; i--) {
     barfinal += bararray[i] + '<br>';

@@ -1,6 +1,6 @@
 # Adobe Interview
 
-A Node.js webserver that takes in a number and returns a roman numeral. <br>
+A Node.js webserver that takes in a number between 1 to 1,000,999 and returns a roman numeral.  <br>
 Roman Numeral Spesification: [Wikipedia](https://en.wikipedia.org/wiki/Roman_numerals)
 
 ## Engineering and Testing Methodology

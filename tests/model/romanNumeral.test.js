@@ -56,7 +56,7 @@ describe('Roman Numeral', function() {
     let newReq = req;
     newReq.query.query = '4000';
 
-    expect(execute(newReq)).eventually.equal('IV');
+    expect(execute(newReq)).eventually.equal('--<br>IV');
   });
 
   it('1 should return roman numeral I', async () => {
@@ -84,20 +84,56 @@ describe('Roman Numeral', function() {
     let newReq = req;
     newReq.query.query = '3999';
 
-    expect(execute(newReq)).eventually.equal('IIICMXCIX')
+    expect(execute(newReq)).eventually.equal('---<br>IIICMXCIX')
   });
 
   it('25459 should return roman numeral XXVCDLIX', async () => {
     let newReq = req;
     newReq.query.query = '25459';
 
-    expect(execute(newReq)).eventually.equal('XXVCDLIX')
+    expect(execute(newReq)).eventually.equal('---<br>XXVCDLIX')
   });
 
-  it('5000000 should return roman numeral -<br>-<br>V', async () => {
+  it('1000000 should return roman numeral -<br>-<br>I', async () => {
     let newReq = req;
-    newReq.query.query = '5000000';
+    newReq.query.query = '1000000';
 
-    expect(execute(newReq)).eventually.equal('-<br>-<br>V')
+    expect(execute(newReq)).eventually.equal('-<br>-<br>I')
   });
+
+  it('1000001 should return roman numeral -<br>-<br>II', async () => {
+    let newReq = req;
+    newReq.query.query = '1000001';
+
+    expect(execute(newReq)).eventually.equal('-<br>-<br>II')
+  });
+
+  it('1000 should return roman numeral -<br>I', async () => {
+    let newReq = req;
+    newReq.query.query = '1000';
+
+    expect(execute(newReq)).eventually.equal('-<br>I')
+  });
+
+  it('999999 should return roman numeral ------<br>CMXCIXCMXCIX', async () => {
+    let newReq = req;
+    newReq.query.query = '999999';
+
+    expect(execute(newReq)).eventually.equal('------<br>CMXCIXCMXCIX')
+  });
+
+  it('1000999 should return roman numeral -<br>-<br>ICMXCIX', async () => {
+    let newReq = req;
+    newReq.query.query = '1000999';
+
+    expect(execute(newReq)).eventually.equal('-<br>-<br>ICMXCIX')
+  });
+
+  it('100100 should return roman numeral -<br>CC', async () => {
+    let newReq = req;
+    newReq.query.query = '100100';
+
+    expect(execute(newReq)).eventually.equal('-<br>CC')
+  });
+
 });
