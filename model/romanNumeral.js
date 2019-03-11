@@ -1,7 +1,6 @@
 module.exports =
     {
       execute: async (req) => {
-
         // Error checking to make sure that the query string is a number
         try {
           if (!req.query) {
@@ -33,9 +32,8 @@ module.exports =
 
 // This function takes in an array of roman numerals and the current number
 // Returns the roman numeral string that has been constructed so far and returns
-// the
+// the Roman Numeral
 function getNumeral(numeralArray, currentNumber, divisionNum, romanNumeralStr) {
-
   // Get the leading number from the current number
   let num = Math.floor(currentNumber / divisionNum);
 
@@ -70,7 +68,6 @@ function getRoman(number) {
 // and returns a roman numeral representation of that number. Vinculum numbers
 // have a bar over the top and this function constructs that number
 function vinculum(number) {
-
   let numbersub = number;
   let num = number;
   let bararray = [];
